@@ -15,5 +15,9 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'create_user' => 'Successfully created user!',
+    'logout' => 'Successfully logged out',
+    'unauthorized' => 'Unauthorized',
+    'unauthenticated' => 'Unauthenticated',
 
 ];
