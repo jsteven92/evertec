@@ -18,8 +18,10 @@ class CreateOrdersPaymentsTable extends Migration
             $table->foreignId('order_id')->constrained();
             $table->string('request_id',50);
             $table->string('process_url',150);
-            $table->enum('status',[0,1]);
+            $table->string('internal_reference',150)->nullable();
+            $table->enum('status',['PENDING','PAYED','EXPIRED','REJECTED']);
 
+            $table->dateTime('called_api_at');
             $table->timestamps();
         });
     }

@@ -3,13 +3,14 @@
 namespace App\Services;
 
 use Carbon\Carbon;
+use Illuminate\Support\Facades\App;
 
 class structureInformationApi
 {
-    private  $arrayAuth;
-    private  $arrayPayment;
-    private  $arrayBuyer;
-    private  $reference;
+    private  $arrayAuth = null;
+    private  $arrayPayment = null;
+    private  $arrayBuyer = null;
+    private  $reference = null;
 
 
     /**
@@ -32,10 +33,11 @@ class structureInformationApi
             $nonce = mt_rand();
         }
 
-        $tranKey = base64_encode(sha1($nonce . $seed . Env('API_SECRET_ID'), true));
+
+        $tranKey = base64_encode(sha1($nonce . $seed . config('api.api_secret_id'), true));
 
         $this->arrayAuth = [
-            "login" => Env('API_LOGIN'),
+            "login" => config('api.api_login'),
             "tranKey" => $tranKey,
             "nonce" => base64_encode($nonce),
             "seed" => $seed,
@@ -61,14 +63,13 @@ class structureInformationApi
     }
 
     function structurePayment(
-        string $reference,
         string $description,
         string $currency,
         string $total
     ): void {
-        $this->reference = $reference;
+        
         $this->arrayPayment =  [
-            "reference" => $reference,
+            "reference" => $this->reference,
             "description" => $description,
             "amount" => [
                 "currency" => $currency,
@@ -90,9 +91,15 @@ class structureInformationApi
             "returnUrl" => "http://example.com/" . $this->reference,
         ];
 
-        $arrayBase["auth"] = $this->arrayAuth;
-        $arrayBase["payment"] = $this->arrayPayment;
-        $arrayBase["buyer"] = $this->arrayBuyer;
+        if (isset($this->arrayAuth)) {
+            $arrayBase["auth"] = $this->arrayAuth;
+        }
+        if (isset($this->arrayPayment)) {
+            $arrayBase["payment"] = $this->arrayPayment;
+        }
+        if (isset($this->arrayBuyer)) {
+            $arrayBase["buyer"] = $this->arrayBuyer;
+        }
 
         return $arrayBase;
     }
@@ -130,5 +137,14 @@ class structureInformationApi
     function setArrayBuyer(): array
     {
         return $this->arrayBuyer;
+    }
+
+    function getReference($reference): void
+    {
+        $this->reference = $reference;
+    }
+    function setReference(): string
+    {
+        return $this->reference;
     }
 }

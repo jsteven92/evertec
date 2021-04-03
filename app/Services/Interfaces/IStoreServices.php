@@ -5,7 +5,7 @@ interface IStoreServices
 {
     /**
      * lista de todos los productos
-     * @return jsonResponse
+     * @return array
      */
     function getListProducts(): array;
     

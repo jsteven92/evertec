@@ -28,6 +28,6 @@ interface IRepository
      * @param int $id
      * @return Model
      */
-    public function update(array $data,int $id): Model;
+    public function update(array $data,int $id);
 
 }

@@ -1,16 +1,18 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Repositories\IRepository;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\Boolean;
 
 abstract class BaseRepository implements IRepository
 {
     abstract function getModel(): Model;
 
-      /**
+    /**
      * @param int id d
      * @return Model|null
      */
@@ -19,7 +21,7 @@ abstract class BaseRepository implements IRepository
         return $this->getModel()->find($id);
     }
 
-     /**
+    /**
      * @return Model[]|Collection
      */
     public function findAll(): Collection
@@ -27,7 +29,7 @@ abstract class BaseRepository implements IRepository
         return $this->getModel()->all();
     }
 
-     /**
+    /**
      * @param array $data
      * @return Model
      */
@@ -36,14 +38,13 @@ abstract class BaseRepository implements IRepository
         return $this->getModel()->create($data);
     }
 
-     /**
+    /**
      * @param array $data
      * @param int $id
      * @return Model
      */
-    public function update(array $data, int $id): Model
+    public function update(array $data, int $id)
     {
-        $record = $this->getModel->find($id);
-        return $record->update($data);
+        return $this->getModel()->find($id)->update($data);
     }
 }

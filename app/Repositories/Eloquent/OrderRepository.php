@@ -7,7 +7,7 @@ use App\Model\Order;
 use App\Repositories\BaseRepository;
 use Illuminate\Database\Eloquent\Model;
 
-class ProductRepository extends BaseRepository
+class OrderRepository extends BaseRepository
 {
     public function getModel():Model
     {
