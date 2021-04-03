@@ -23,6 +23,11 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
+Route::group(['prefix' => 'product', 'middleware' => ['auth:api']], function () {
+    Route::get('/listProducts','StoreController@getListProducts');
+    Route::get('/product/{id}','StoreController@getProduct');
+});
+
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });

@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use Carbon\Carbon;
-use DateTime;
 
 class structureInformationApi
 {
@@ -103,7 +102,7 @@ class structureInformationApi
         $arrayBase["auth"] = $this->arrayAuth;
         return $arrayBase;
     }
-  
+
     function structureRevercePayMent(string $internalReference): array
     {
         $arrayBase["internalReference"] = $internalReference;

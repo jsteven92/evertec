@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
+use App\Services\Interfaces\IstoreServices;
+use App\Services\storeServices;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -14,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(IstoreServices::class, storeServices::class);
     }
 
     /**
