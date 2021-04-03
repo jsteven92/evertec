@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Eloquent\ProductRepository;
-use Illuminate\Http\Request;
+use App\Services\structureInformationApi as ServicesStructureInformationApi;
+use structureInformationApi;
 
 class ExampleController extends Controller
 {
@@ -15,6 +16,9 @@ class ExampleController extends Controller
     }
 
     public function index(){
+        dd(rand(1000,2000));
+        $structureInformationApi = new ServicesStructureInformationApi();
+        dd(json_encode($structureInformationApi->structureCreateRequest()));
         dd($this->productRepository->findAll());
 
     }

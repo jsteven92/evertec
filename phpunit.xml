@@ -27,5 +27,12 @@
         <server name="QUEUE_CONNECTION" value="sync"/>
         <server name="SESSION_DRIVER" value="array"/>
         <server name="TELESCOPE_ENABLED" value="false"/>
+
+        <server name="API_BASE" value="https://test.placetopay.com/redirection/api/"/>
+        <server name="API_CREATE_REQUEST" value="session/"/>
+        <server name="API_REQUEST_INFORMATION" value="session/"/>
+        <server name="API_REVERSE_PAYMENT" value="reverse"/>
+        <server name="API_LOGIN" value="6dd490faf9cb87a9862245da41170ff2"/>
+        <server name="API_SECRET_ID" value="024h1IlD"/>
     </php>
 </phpunit>
