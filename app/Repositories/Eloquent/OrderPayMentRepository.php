@@ -70,4 +70,18 @@ class OrderPayMentRepository extends BaseRepository
             ->where('order_id', $orderId)
             ->get();
     }
+    /**
+     * trae el requestId si la orden nunca a sido 
+     * verificado el estado del pago en al api
+     * @param string $orderId llave a buscar
+     */
+    public function getRequestIdOrderNotCalledApi(string $orderId)
+    {
+        return $this->getModel()
+            ->where('order_id', $orderId)
+            ->whereNull('called_api_at')
+            ->select('request_id')
+            ->limit(1)
+            ->get();
+    }
 }

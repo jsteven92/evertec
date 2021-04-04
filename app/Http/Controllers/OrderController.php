@@ -43,4 +43,10 @@ class OrderController extends Controller
 
         return response()->json($response['message'], 200);
     }
+
+    function listOrder(): JsonResponse
+    {
+        $response = $this->orderService->listOrder();
+        return response()->json($response['message'], 200);
+    }
 }

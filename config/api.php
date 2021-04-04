@@ -15,6 +15,7 @@ return [
     'api_create_request' =>  env('API_CREATE_REQUEST', 'session/'),
     'api_request_information' => env('API_REQUEST_INFORMATION', 'session/'),
     'api_reverse_payment' => env('API_REVERSE_PAYMENT', 'reverse'),
+    'api_url_return' => env('API_URL_RETURN', 'http://example.com/'),
 
     /**
      * login de conexion para la api

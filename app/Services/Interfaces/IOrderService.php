@@ -32,4 +32,10 @@ interface IOrderService
      * @return array
      */
     function reversePayment(string $internationalReference): array;
+
+    /**
+     * Lista todas las ordenes de la tienda
+     * @return array
+     */
+    function listOrder(): array;
 }

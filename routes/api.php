@@ -24,13 +24,14 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 Route::group(['prefix' => 'product', 'middleware' => ['auth:api']], function () {
-    Route::get('/listProducts', 'StoreController@getListProducts');
+    Route::post('/listProducts', 'StoreController@getListProducts');
     Route::get('/product/{id}', 'StoreController@getProduct');
 });
 
 Route::group(['prefix' => 'order', 'middleware' => ['auth:api']], function () {
     Route::post('/newOrder', 'OrderController@newOrder');
     Route::post('/informationOrder', 'OrderController@informationOrder');
+    Route::post('/listOrder', 'OrderController@listOrder');
 });
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {

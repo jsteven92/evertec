@@ -88,7 +88,7 @@ class structureInformationApi
             "expiration" => $day,
             "ipAddress" => "127.0.0.1",
             "userAgent" => "PlacetoPay Sandbox",
-            "returnUrl" => "http://example.com/" . $this->reference,
+            "returnUrl" => config('api.api_url_return') . $this->reference,
         ];
 
         if (isset($this->arrayAuth)) {

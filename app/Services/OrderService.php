@@ -6,6 +6,7 @@ use App\Repositories\Eloquent\OrderPayMentRepository;
 use App\Repositories\Eloquent\OrderRepository;
 use App\Services\Interfaces\IOrderService;
 use DateTime;
+use Hamcrest\Arrays\IsArray;
 use Illuminate\Support\Facades\Http;
 
 class OrderService implements IOrderService
@@ -109,21 +110,42 @@ class OrderService implements IOrderService
         $orderStatus = '';
         $orderId = 0;
 
-        if ($result['status']['status'] == 'APPROVED') {
-            if (isset($result['payment'])) {
-                if ($result['payment'][0]['status']['status'] == 'APPROVED') {
-                    $orderStatus = 'PAYED';
-                    $internalReference = $result['payment'][0]['internalReference'];
+        if (isset($result['payment'])) {
+            if (
+                $result['payment'][0]['status']['status'] == 'APPROVED'
+                || $result['payment'][0]['status']['status'] == 'REJECTED'
+            ) {
 
-                    $dataUpdatePaymet = [
-                        'called_api_at' => new DateTime(),
-                        'internal_reference' => $internalReference,
-                        'status' => 'PAYED'
-                    ];
+                switch ($result['status']['status']) {
+                    case 'APPROVED':
+                        $orderStatus = 'PAYED';
+                        $payStatus = 'PAYED';
+                        break;
+                    case 'PENDING':
+                        $orderStatus = '';
+                        $payStatus = 'PENDING';
+                        break;
+                    case 'REJECTED':
+                        $orderStatus = 'REJECTED';
+                        $payStatus = 'REJECTED';
+                        break;
 
-                    $resultOrder = $this->orderPayMentRepository->getOrderIdToRequestId($requestId);
-                    $orderId = $resultOrder[0]->order_id;
+                    default:
+                        $orderStatus = '';
+                        $payStatus = 'PENDING';
+                        break;
                 }
+
+                $internalReference = $result['payment'][0]['internalReference'];
+
+                $dataUpdatePaymet = [
+                    'called_api_at' => new DateTime(),
+                    'internal_reference' => $internalReference,
+                    'status' => $payStatus
+                ];
+
+                $resultOrder = $this->orderPayMentRepository->getOrderIdToRequestId($requestId);
+                $orderId = $resultOrder[0]->order_id;
             }
         } else {
             $dataUpdatePaymet = [
@@ -155,6 +177,11 @@ class OrderService implements IOrderService
      */
     function informationOrder(string $orderId): array
     {
+        $result = $this->orderPayMentRepository->getRequestIdOrderNotCalledApi($orderId);
+        if (count($result) > 0) {
+            $this->verifyStatusOrder($result[0]->request_id);
+        }
+
         $resultOrder = $this->orderRepository->find($orderId);
 
         $detailOrder = [
@@ -166,9 +193,9 @@ class OrderService implements IOrderService
             'product_id' => $resultOrder->product_id,
             'product_name' => "Nombre producto",
         ];
+        $detailPayment = [];
 
         $resultPayment = $this->orderPayMentRepository->getAllToOrderId($orderId);
-        $verifyStatusOrder = false;
 
         foreach ($resultPayment as $payment) {
             $detailPayment[] = [
@@ -178,13 +205,6 @@ class OrderService implements IOrderService
                 'status' => $payment->status,
                 'called_api_at' => $payment->called_api_at
             ];
-            if ($payment->called_api_at == null) {
-                $verifyStatusOrder = true;
-            }
-        }
-
-        if ($verifyStatusOrder) {
-            $this->verifyStatusOrder($payment->request_id);
         }
 
         $detail['order'] = $detailOrder;
@@ -210,5 +230,28 @@ class OrderService implements IOrderService
             ]
         );
         return [];
+    }
+
+    /**
+     * Lista todas las ordenes de la tienda
+     * @return array
+     */
+    function listOrder(): array
+    {
+        $detail = [];
+
+        $result = $this->orderRepository->findAll();
+        foreach ($result as $order) {
+            $detail[] = [
+                'name' => $order->customer_name,
+                'email' => $order->customer_email,
+                'mobile' => $order->customer_mobile,
+                'status' => $order->status,
+                'price' => $order->price,
+                'product_id' => $order->product_id,
+                'product_name' => "Nombre producto",
+            ];
+        }
+        return ['status' => true, 'message' => $detail];
     }
 }
