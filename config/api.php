@@ -15,7 +15,7 @@ return [
     'api_create_request' =>  env('API_CREATE_REQUEST', 'session/'),
     'api_request_information' => env('API_REQUEST_INFORMATION', 'session/'),
     'api_reverse_payment' => env('API_REVERSE_PAYMENT', 'reverse'),
-    'api_url_return' => env('API_URL_RETURN', 'http://example.com/'),
+    'api_url_return' => env('API_URL_RETURN', 'http://127.0.0.1:8000/informationOrder/'),
 
     /**
      * login de conexion para la api

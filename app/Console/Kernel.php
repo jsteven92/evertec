@@ -37,8 +37,7 @@ class Kernel extends ConsoleKernel
                 $orderService->verifyStatusOrder($orderPayment->request_id);
             }
             
-        });
-        //->everyMinute();
+        })->everyMinute();
     
     }
 

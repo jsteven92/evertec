@@ -250,6 +250,7 @@ class OrderService implements IOrderService
                 'price' => $order->price,
                 'product_id' => $order->product_id,
                 'product_name' => "Nombre producto",
+                'id' => $order->id,
             ];
         }
         return ['status' => true, 'message' => $detail];

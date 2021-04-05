@@ -1,0 +1,10 @@
+const parameters = {
+    'url': 'http://127.0.0.1:8000/api/',
+    'headers': {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiNjcxZjIyMWQ1ODhiYjk0Njc5NGQyYWRiNzQ1NmE5ZWUxZTllYWQzYWY0YTk1NTYyY2UyM2JjODc5NDU3ZjQzMWI5NTZlNzU2OTNmZTU2Y2IiLCJpYXQiOjE2MTc0OTMzOTEsIm5iZiI6MTYxNzQ5MzM5MSwiZXhwIjoxNjQ5MDI5MzkxLCJzdWIiOiIyIiwic2NvcGVzIjpbXX0.qo0AyoXQaiqzDRSLD1A1rzidkzXYEhtdvai32v21_TFcOEmsDCUQKMbjumjpk9qvjUdvRTALHNJN3rC_KGRxbDQj4C-s35bhUqh3-23N4VKXFYgWerzFmvxVZo63WjbppD-vveZkkGMhiT_9I7S0CNO8brCSqVRxwl3KZKbL8qk4Rxp6LWCw1eV-GN1O0OGlWKyo-rg3W9xHsq1iBCrlyRpdCcd5JY-n1vtYzHSUIiONH2r5ARwecmB2dXghDCeGEbuA_siamm6KYDbpOyS-IU0emefKGWDS4TAPBqt-6a2SLR1MxTpBpMai7Z8T5pzRCDMBFR8DPT0nGzVgy47PyM2NrMuPZHiq-W3XFoWa9DSrbP9pFc1GK26YlyXS1SiuNsXIOjiSS__G0DM9bEMwrrfQf-DTJ8si_xeJFX-ur-DifFr2CPmpIfkIS8FJbI6DXvop5gCcaOogBILcW7VuhHUF1rcspInhXCo7-3E66fMYrQozzL7iamNkYsc0yIHz8t7JazY5AYAaxCEEHa3kSXGbbARI1pZfKyB-cfasLb3Im_0lwSrsM0ENYTkP1s1uTEmGte6EJFPZHZFzVj__ruPU6vF98V5hrYRYdnFzDvsYlxl2BsAxOLF62rfKctAwHPeVpVsFI4j-n8XDxNRtvDKtmF2LoG26B4INohh_9xY'
+    }
+}
+
+export default parameters

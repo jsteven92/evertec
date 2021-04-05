@@ -13,4 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'ExampleController@index');
+Route::get('/', 'ShopController@confirmOrder');
+Route::get('/informationOrder/{id}', 'ShopController@informationOrder');
+Route::get('/listOrder', 'ShopController@listOrders');
