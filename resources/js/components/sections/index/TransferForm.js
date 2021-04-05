@@ -35,7 +35,7 @@ const TransferForm = ({form, onChange, onSubmit}) => (
         <button
             type="submit"
             className="btn btn-primary mb-2"
-        >Pague con place<span className="text-warning">to</span>play</button>
+        >Pague con place<span className="text-warning">to</span>pay</button>
 
     </form>
 )

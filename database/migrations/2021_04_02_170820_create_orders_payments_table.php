@@ -21,7 +21,7 @@ class CreateOrdersPaymentsTable extends Migration
             $table->string('internal_reference',150)->nullable();
             $table->enum('status',['PENDING','PAYED','EXPIRED','REJECTED']);
 
-            $table->dateTime('called_api_at');
+            $table->dateTime('called_api_at')->nullable();
             $table->timestamps();
         });
     }

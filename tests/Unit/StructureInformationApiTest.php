@@ -3,7 +3,7 @@
 namespace Tests\Unit\app\Services;
 
 use App\Services\structureInformationApi;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class StructureInformationApiTest extends TestCase
 {
@@ -54,5 +54,4 @@ class StructureInformationApiTest extends TestCase
 
         $this->assertSame(4, count($payment));
     }
-
 }

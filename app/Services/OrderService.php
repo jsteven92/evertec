@@ -114,6 +114,7 @@ class OrderService implements IOrderService
             if (
                 $result['payment'][0]['status']['status'] == 'APPROVED'
                 || $result['payment'][0]['status']['status'] == 'REJECTED'
+                || $result['payment'][0]['status']['status'] == 'PENDING'
             ) {
 
                 switch ($result['status']['status']) {
@@ -146,6 +147,10 @@ class OrderService implements IOrderService
 
                 $resultOrder = $this->orderPayMentRepository->getOrderIdToRequestId($requestId);
                 $orderId = $resultOrder[0]->order_id;
+            } else {
+                $dataUpdatePaymet = [
+                    'called_api_at' => new DateTime()
+                ];
             }
         } else {
             $dataUpdatePaymet = [

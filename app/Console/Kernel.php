@@ -27,18 +27,16 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->call(function(){
+        $schedule->call(function () {
             $orderPaymentRepository = new OrderPayMentRepository();
             $orderRepository = new OrderRepository();
             $result = $orderPaymentRepository->getRequestIdOrderPending();
 
             foreach ($result as $orderPayment) {
-                $orderService = new OrderService($orderRepository,$orderPaymentRepository);
+                $orderService = new OrderService($orderRepository, $orderPaymentRepository);
                 $orderService->verifyStatusOrder($orderPayment->request_id);
             }
-            
         })->everyMinute();
-    
     }
 
     /**
@@ -48,7 +46,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

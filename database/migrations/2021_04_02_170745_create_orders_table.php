@@ -22,7 +22,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('product_id')->constrained();
             $table->decimal('price', 8, 2);
             $table->timestamps();
-            $table->dateTime('deleted_at');
+            $table->dateTime('deleted_at')->nullable();
         });
     }
 

@@ -20,6 +20,7 @@ class StoreController extends Controller
     function getListProducts(): JsonResponse
     {
         $response = $this->storeServices->getListProducts();
+        
         return response()->json($response['message'], 200);
     }
 
